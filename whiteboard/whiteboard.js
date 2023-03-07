@@ -1,31 +1,17 @@
 function init()
 {
-    const whiteboardCanvas = document.getElementById("whiteboardCanvas");
     const colorInput = document.getElementById("colorInput");
     const sizeInput = document.getElementById("sizeInput");
     const clearWhiteBoardInput = document.getElementById("clearWhiteBoardInput");
     const instrumentSelector = document.getElementById("instrumentSelector");
+    const whiteboardCanvas = document.getElementById("whiteboardCanvas");
 
-    let drawing = false;
-
+    // Canvas Settings
     whiteboardCanvas.width = window.innerWidth;
     whiteboardCanvas.height = window.innerHeight;
-
-    colorInput.value = JSON.parse(localStorage.getItem("selioterWhiteboardColor"));
-    sizeInput.value = JSON.parse(localStorage.getItem("selioterWhiteboardSize"));
-    instrumentSelector.value = JSON.parse(localStorage.getItem('selioterWhiteboardShape'));
-
     const context = whiteboardCanvas.getContext('2d');
+    let drawing = false;
 
-    colorInput.addEventListener('change', (e) => {
-        localStorage.setItem("selioterWhiteboardColor", JSON.stringify(e.target.value));
-    });
-    sizeInput.addEventListener('change', (e) => {
-        localStorage.setItem("selioterWhiteboardSize", JSON.stringify(e.target.value));
-    });
-    instrumentSelector.addEventListener('change', (e) => {
-        localStorage.setItem("selioterWhiteboardShape", JSON.stringify(e.target.value));
-    });
 
     function startDrawing() {
         drawing = true;
@@ -34,23 +20,53 @@ function init()
         drawing = false;
         context.beginPath();
     }
-    function displayDrawing(e) {
-        if (!drawing) return;
-        context.strokeStyle =  JSON.parse(localStorage.getItem("selioterWhiteboardColor"))|| colorInput.value;
-        context.lineWidth =  JSON.parse(localStorage.getItem("selioterWhiteboardSize"))|| sizeInput.value;
-        context.lineCap = JSON.parse(localStorage.getItem("selioterWhiteboardShape"))|| instrumentSelector.value;
+
+    function getStorageItem(storageName, inputValue) {
+        // GET data from the loacal storage db
+        return JSON.parse(localStorage.getItem(storageName))|| inputValue;
+    }
+
+    function setStorageItem(storageName, inputValue){
+        // update local storage db with data
+        localStorage.setItem(storageName, JSON.stringify(inputValue));
+    }
+
+    function updateCanvasContext(e) {
+        context.strokeStyle = getStorageItem("selioterWhiteboardColor", colorInput.value);
+        context.lineWidth = getStorageItem("selioterWhiteboardSize", sizeInput.value);
+        context.lineCap = getStorageItem("selioterWhiteboardShape", instrumentSelector.value);
         context.lineTo(e.clientX, e.clientY);
         context.lineTo(e.clientX, e.clientY);
         context.stroke();
+    }
+
+    function displayDrawing(e) {
+        if (!drawing) return;
+        updateCanvasContext(e);
     }
 
     function clearWhiteboard(){
         whiteboardCanvas.width = whiteboardCanvas.width;
     }
 
+    colorInput.value = getStorageItem("selioterWhiteboardColor", "#000");
+    sizeInput.value = getStorageItem("selioterWhiteboardSize", 10);
+    instrumentSelector.value = getStorageItem('selioterWhiteboardShape', "round");
+
+    colorInput.addEventListener('change', (e) => {
+        setStorageItem("selioterWhiteboardColor", e.target.value);
+    });
+    sizeInput.addEventListener('change', (e) => {
+        setStorageItem("selioterWhiteboardColor", e.target.value);
+        localStorage.setItem("selioterWhiteboardSize", JSON.stringify(e.target.value));
+    });
+    instrumentSelector.addEventListener('change', (e) => {
+        localStorage.setItem("selioterWhiteboardShape", JSON.stringify(e.target.value));
+    });
+
     whiteboardCanvas.addEventListener("mousedown", startDrawing);
-    whiteboardCanvas.addEventListener("mouseup", stopDrawing);
     whiteboardCanvas.addEventListener("mousemove", displayDrawing);
+    whiteboardCanvas.addEventListener("mouseup", stopDrawing);
 
     clearWhiteBoardInput.addEventListener("click", clearWhiteboard);
 
