@@ -57,11 +57,10 @@ function init()
         setStorageItem("selioterWhiteboardColor", e.target.value);
     });
     sizeInput.addEventListener('change', (e) => {
-        setStorageItem("selioterWhiteboardColor", e.target.value);
-        localStorage.setItem("selioterWhiteboardSize", JSON.stringify(e.target.value));
+        setStorageItem("selioterWhiteboardSize", e.target.value);
     });
     instrumentSelector.addEventListener('change', (e) => {
-        localStorage.setItem("selioterWhiteboardShape", JSON.stringify(e.target.value));
+        setStorageItem("selioterWhiteboardShape", e.target.value);
     });
 
     whiteboardCanvas.addEventListener("mousedown", startDrawing);
