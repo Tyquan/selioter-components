@@ -1,0 +1,65 @@
+body {
+    margin: 0px;
+}
+header {
+    background-color: cornflowerblue;
+    padding-left: 100px;
+    display: flex;
+    color: white;
+}
+
+#whiteboardInputs {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0px;
+    z-index: 1;
+    top: 0px;
+    background-color: #2d3436;
+    color: white;
+    height: 475px;
+    padding-top: 10%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+#logo {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+    background-color: #2d3436;
+    color:white;
+    width: 100%;
+    padding-left: 1%;
+}
+
+#swatch{
+    background: white;
+    box-shadow: 1em 1em 1em rgba(0, 0, 0, .1);
+    display: flex;
+    flex-direction: column;
+    color: #2d3436;
+    text-align: center;
+}
+
+input[type="color"] {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    height: 15em;
+    padding: 0;
+    width: 15em;
+  }
+
+  #clearWhiteBoardInput {
+    background-color: #d63031;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    border: 0;
+    border-radius: 0;
+  }

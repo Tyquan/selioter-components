@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Selioter Workspace</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <main id="whiteboardApp">
+            <section id="logo">
+                <h1>Selioter - Whiteboard</h1>
+            </section>
+            <section id="whiteboardInputs">
+                <label>Shape </label>
+                <select id="instrumentSelector">
+                    <option id="round" value="round">Round</option>
+                    <option id="square" value="square">Square</option>
+                    <option id="butt" value="butt">Butt</option>
+                </select>
+                <br />
+                <section id="swatch">
+                    <input type="color" id="colorInput" />
+                </section>
+                <br />
+                <label>Size </label>
+                <select name="size" id="sizeInput">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="18">18</option>
+                    <option value="24">24</option>
+                    <option value="30">30</option>
+                    <option value="36">36</option>
+                    <option value="48">48</option>
+                    <option value="60">60</option>
+                    <option value="75">75</option>
+                    <option value="100">100</option>
+                </select>
+                <br />
+                <button id="clearWhiteBoardInput">Clear The Board</button>
+            </section>
+            <section id="whiteboardCanvasArticle">
+                <div id="inHouse">
+                    <canvas id="whiteboardCanvas"></canvas>
+                </div>
+            </section>
+        </main>
+        <script src="./whiteboard.js"></script>
+    </body>
+</html>
